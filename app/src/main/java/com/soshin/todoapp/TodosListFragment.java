@@ -1,5 +1,6 @@
 package com.soshin.todoapp;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -82,6 +86,39 @@ public class TodosListFragment extends Fragment{
         DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decoration);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Delete Todo Task?")
+                        .setMessage("Are you sure you want to delete this Todo Task?.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                int position = viewHolder.getAdapterPosition();
+                                List<Todo> todoList = adapter.mTodos;
+                                TodoViewModel.delete(todoList.get(position));
+                                Toast toast = Toast.makeText(getActivity(), "Todo Task Deleted", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .show();
+            }
+
+        }).attachToRecyclerView(recyclerView);
+
         return view;
     }
 
@@ -89,10 +126,7 @@ public class TodosListFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // deprecated, mTodoViewModel = of(this).get(TodoViewModel.class);
         TodoViewModel mTodoViewModel = new ViewModelProvider(this).get(TodoViewModel.class);
-
-
         mTodoViewModel.getTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() {
             @Override
             public void onChanged(@Nullable final List<Todo> todos) {
@@ -101,14 +135,13 @@ public class TodosListFragment extends Fragment{
             }
         });
 
-        // ------------------------------------------------Switches to AddTaskFragment-------------------------------------------------------
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.container, AddTodoFragment.newInstance())
-//                        .addToBackStack(null)
-//                        .commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, AddToDoFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
 
         });
