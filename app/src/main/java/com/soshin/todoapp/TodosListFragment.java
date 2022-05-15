@@ -39,10 +39,10 @@ public class TodosListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view =  inflater.inflate(R.layout.fragment_todos_list, container, false);
-       fabButton = view.findViewById(R.id.add_btn);
-       recyclerView = view.findViewById(R.id.recyclerview);
-       return view;
+        View view =  inflater.inflate(R.layout.fragment_todos_list, container, false);
+        fabButton = view.findViewById(R.id.add_btn);
+        recyclerView = view.findViewById(R.id.recyclerview);
+        return view;
     }
 
     @Override
