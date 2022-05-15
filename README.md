@@ -20,3 +20,8 @@ You can delete all the taks by clicking upon the menu option/more option near lo
 #### *** ToDo App demo ***.
 
 <img src="gif/ToDoApp.gif" width="400" />
+
+#### *** References: ***
+https://github.com/binay-shah/TodoApp_dma_2021
+####
+https://github.com/ebbi/TodoMVVM
