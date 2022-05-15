@@ -76,6 +76,7 @@ public class TodosListFragment extends Fragment{
 
             @Override
             public void onUpdate(Todo todo) {
+                ((MainActivity)getActivity()).moveToUpdate(todo);
             }
         });
         recyclerView.setAdapter(adapter);
