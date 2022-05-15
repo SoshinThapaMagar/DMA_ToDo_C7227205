@@ -14,5 +14,8 @@
     <color name="color5">#187498</color>
     <color name="color6">#FF0000</color>
 
+    <color name="materialRed">#F32424</color>
+    <color name="materialOrange">#FF8D29</color>
+    <color name="materialYellow">#FFFA4D</color>
 
 </resources>
