@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.soshin.todoapp.database.Todo;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
 
@@ -82,10 +83,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         String priorityString = "" + priority; // converts int to String
         holder.priorityView.setText(priorityString);
 
-        GradientDrawable priorityCircle = (GradientDrawable) holder.priorityView.getBackground();
         // Get the appropriate background color based on the priority
         int priorityColor = getPriorityColor(priority);
-        priorityCircle.setColor(priorityColor);
+        holder.priorityView.setBackgroundColor(priorityColor);
 
 
     }
