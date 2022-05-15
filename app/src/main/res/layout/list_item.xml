@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/teal_900"
+        android:background="@color/color5"
         android:orientation="vertical">
 
         <!-- TextView that displays the description -->
@@ -54,17 +54,14 @@
         android:layout_marginLeft="@dimen/small_margin"
         android:layout_marginEnd="@dimen/small_margin"
         android:gravity="center"
-        android:src="@drawable/ic_baseline_update_24"/>
+        android:src="@drawable/update"/>
 
     <TextView
         android:id="@+id/priorityTextView"
         android:layout_width="@dimen/p_view"
-        android:layout_height="@dimen/p_view"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:background="@drawable/priority_circle"
+        android:background="@color/color6"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@android:color/primary_text_light"

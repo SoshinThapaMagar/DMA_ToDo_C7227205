@@ -13,7 +13,7 @@ public class Repository {
 
     private ArrayList<Todo> todos;
 
-    private Repository(Context context) {
+    private  Repository(Context context) {
         todos = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Todo todo = new Todo();
